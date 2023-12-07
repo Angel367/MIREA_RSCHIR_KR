@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ service.title }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-md-6">
+    <h1>{{ service.title }}</h1>
+
+    <p>
+      <b>Категория:</b>
+      <a href="{% url 'category' service.category.pk %}">{{ service.category.title }}</a>
+    </p>
+
+    <p>
+      <b>Продолжительность:</b> {{ service.duration }}
+    </p>
+
+    {{ service.description }}
+
+    <a href="{% url 'make_appointment' service.pk %}" class="btn btn-success">
+      Записаться
+    </a>
+
+  </div>
+
+  <div class="col-md-6">
+    {# фото услуги #}
+  </div>
+
+</div>
+
+{% endblock %}

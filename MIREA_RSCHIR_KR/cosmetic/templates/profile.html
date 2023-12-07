@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+
+<h1>{{ user.get_full_name|default:"Профиль" }}</h1>
+
+<p>
+  <b>Имя:</b> {{ user.first_name }}
+</p>
+
+<p>
+  <b>Фамилия:</b> {{ user.last_name }}
+</p>
+
+<p>
+  <b>Email:</b> {{ user.email }}
+</p>
+
+<p>
+  <b>Телефон:</b> {{ profile.phone }}
+</p>
+
+<p>
+  <b>Дата рождения:</b> {{ profile.birth_date|date:"d.m.Y" }}
+</p>
+
+{# Дополнительные данные профиля #}
+
+{#<a href="{% url 'profile_edit' %}">#}
+{#  Редактировать <i class="fas fa-pen"></i>#}
+{#</a>#}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+
+<h1>Добро пожаловать в наш косметический центр!</h1>
+
+<p>О нас: </p>
+<p>Краткая информация о центре - история, концепция, преимущества и т.д.</p>
+
+<h2>Наши услуги:</h2>
+
+{% for category in categories %}
+  <h3>{{ category.title }}</h3>
+
+  <ul>
+    {% for service in category.services.all %}
+      <li>
+        <a href="{% url 'service-detail' service.pk %}">
+          {{ service.title }}
+        </a>
+          - {{ service.price }} / {{ service.duration }}
+
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endfor %}
+
+<a href="{% url 'service-list' %}" class="btn">Посмотреть все услуги</a>
+
+{% endblock %}

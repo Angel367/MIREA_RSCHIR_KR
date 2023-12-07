@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Наши специалисты{% endblock %}
+
+{% block content %}
+
+<h1>Наши специалисты</h1>
+
+<div class="row">
+
+  {% for specialist in specialists %}
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card">
+        <img src="{{ specialist.user.photo }}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{ specialist.full_name }}</h5>
+          <p class="card-text">
+            {{ specialist.specialty }}
+          </p>
+          <a href="{% url 'specialist-detail' specialist.pk %}" class="btn btn-primary">
+            Подробнее
+          </a>
+        </div>
+      </div>
+    </div>
+
+  {% endfor %}
+
+</div>
+
+{% endblock %}

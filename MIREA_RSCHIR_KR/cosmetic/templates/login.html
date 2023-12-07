@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+
+<h1>Вход</h1>
+
+<form method="post">
+  {% csrf_token %}
+
+  <div class="form-group">
+    <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+    {{ form.username }}
+  </div>
+
+  <div class="form-group">
+    <label for="{{ form.password.id_for_label }}">Пароль</label>
+    {{ form.password }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    Войти
+  </button>
+
+</form>
+
+<p>
+  У вас нет аккаунта? <a href="{% url 'signup' %}">Зарегистрируйтесь</a>
+</p>
+
+{% endblock %}
