@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from .views import *
@@ -13,11 +13,11 @@ urlpatterns = [
     path('specialists/', SpecialistListView.as_view(), name='specialist-list'),
     path('specialists/<int:pk>/', SpecialistDetailView.as_view(), name='specialist-detail'),
 
-    path('cabinets/', CabinetListView.as_view(), name='cabinet-list'),
-
     path('make_appointment/', make_appointment, name='make-appointment'),
 
     path('login/', AuthLoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('signup/', RegisterView.as_view(), name='signup'),
     path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/edit/', ProfileEditView.as_view(), name='profile_edit'),
 ]

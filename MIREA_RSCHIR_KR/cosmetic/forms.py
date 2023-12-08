@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class AppointmentForm(forms.Form):
+
     service = forms.ModelChoiceField(
         queryset=Service.objects.all(),
         label='Услуга'

@@ -19,17 +19,17 @@
 </p>
 
 <p>
-  <b>Телефон:</b> {{ profile.phone }}
+  <b>Телефон:</b> {{ user.phone }}
 </p>
 
 <p>
-  <b>Дата рождения:</b> {{ profile.birth_date|date:"d.m.Y" }}
+  <b>Дата рождения:</b> {{ user.birth_date|date:"d.m.Y" }}
 </p>
 
-{# Дополнительные данные профиля #}
 
-{#<a href="{% url 'profile_edit' %}">#}
-{#  Редактировать <i class="fas fa-pen"></i>#}
-{#</a>#}
+
+<a href="{% url 'profile_edit' %}">
+  Редактировать <i class="fas fa-pen"></i>
+</a>
 
 {% endblock %}

@@ -35,16 +35,9 @@ class Service(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
 
-# Модель Кабинет
-class Cabinet(models.Model):
-    number = models.SmallIntegerField()
-    specialists = models.ManyToManyField(Specialist)
-
-
 # Модель Запись
 class Appointment(models.Model):
     client = models.ForeignKey(User, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
-    cabinet = models.ForeignKey(Cabinet, on_delete=models.SET_NULL, blank=True, null=True)
     datetime = models.DateTimeField()

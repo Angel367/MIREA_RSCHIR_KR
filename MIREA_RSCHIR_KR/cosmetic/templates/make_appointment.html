@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Запись на прием{% endblock %}
+
+{% block content %}
+
+<h1>Запись на прием</h1>
+
+<form method="post">
+  {% csrf_token %}
+
+  <div class="form-group">
+    <label>{{ form.service.label }}</label>
+    {{ form.service }}
+  </div>
+  <div class="form-group">
+    <label>{{ form.specialist.label }}</label>
+    {{ form.specialist }}
+  </div>
+
+  <div class="form-group">
+    <label>{{ form.date.label }}</label>
+    {{ form.date }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Записаться</button>
+
+</form>
+
+{% endblock %}

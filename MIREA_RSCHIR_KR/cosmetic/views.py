@@ -3,13 +3,14 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, ListView, DetailView
 from .forms import AppointmentForm, RegisterForm
 from .models import *
-from django.contrib.auth.views import LoginView
-from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic.edit import FormView, UpdateView
+from django.urls import reverse_lazy, reverse
 
 
 class AuthLoginView(LoginView):
     template_name = 'login.html'
+    next_page = 'profile'
     extra_context = {'title': 'Вход'}
 
 
@@ -54,11 +55,16 @@ class ServiceListView(ListView):
     model = Service
     template_name = "service_list.html"
 
-    extra_context = {"categories": ServiceCategory.objects.all()}
+    extra_context = {"services": Service.objects.all()}
 
 
 class ServiceDetailView(DetailView):
     model = Service
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
     template_name = "service_detail.html"
 
 
@@ -78,12 +84,9 @@ class SpecialistDetailView(DetailView):
         return context
 
 
-class CabinetListView(ListView):
-    model = Cabinet
-    template_name = "main/cabinet_list.html"
-
-
 def make_appointment(request):
+    if not request.user.is_authenticated:
+        return redirect(to="/login/")
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
@@ -101,8 +104,20 @@ def make_appointment(request):
             )
             appointment.save()
 
-            return redirect('appointment-confirmation')
+            return redirect('/')
         else:
             form = AppointmentForm()
 
-        return render(request, 'main/make_appointment.html', {'form': form})
+    return render(request, 'make_appointment.html', {'form': AppointmentForm})
+
+
+class ProfileEditView(UpdateView):
+    model = User
+    template_name = 'profile_edit.html'
+    fields = ["first_name", "last_name", "email", "phone", "photo", "birth_date"]
+
+    def get_success_url(self):
+        return reverse('profile')
+
+    def get_object(self, **kwargs):
+        return self.request.user

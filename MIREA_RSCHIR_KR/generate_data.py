@@ -13,7 +13,7 @@ django.setup()
 
 fake = Faker()
 User = get_user_model()
-from cosmetic.models import Specialist, ServiceCategory, Service, Cabinet, Appointment
+from cosmetic.models import Specialist, ServiceCategory, Service, Appointment
 
 
 class Command(BaseCommand):
@@ -72,22 +72,12 @@ class Command(BaseCommand):
             )
             services.append(service)
 
-        # Generate Cabinets
-        cabinets = []
-        for _ in range(5):
-            cabinet = Cabinet.objects.create(
-                number=random.randint(1, 100),
-            )
-            cabinet.specialists.set(random.sample(specialists, random.randint(1, 3)))
-            cabinets.append(cabinet)
-
         # Generate Appointments
         for _ in range(10):
             appointment = Appointment.objects.create(
                 client=random.choice(users),
                 service=random.choice(services),
                 specialist=random.choice(specialists),
-                cabinet=random.choice(cabinets),
                 datetime=fake.future_datetime(),
             )
 

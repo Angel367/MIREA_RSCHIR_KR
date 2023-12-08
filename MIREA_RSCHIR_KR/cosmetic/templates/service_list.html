@@ -6,14 +6,11 @@
 
   <h1>Услуги</h1>
 
-  {% for category in categories %}
+  {% for service in services %}
 
     <h2>{{ category.title }}</h2>
 
     <div class="row">
-
-      {% for service in category.services.all %}
-
         <div class="col-md-6">
           <div class="card mb-3">
             <div class="card-body">
@@ -21,15 +18,12 @@
               <p class="card-text">
                 {{ service.description|truncatewords:20 }}
               </p>
-              <a href="{% url 'service-detail' service.pk %}" class="btn btn-primary">
+              <a href="{% url 'service-detail' service.id %}" class="btn btn-primary">
                 Подробнее
               </a>
             </div>
           </div>
         </div>
-
-      {% endfor %}
-
     </div>
 
   {% endfor %}

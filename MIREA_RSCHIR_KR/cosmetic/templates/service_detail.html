@@ -9,10 +9,10 @@
   <div class="col-md-6">
     <h1>{{ service.title }}</h1>
 
-    <p>
-      <b>Категория:</b>
-      <a href="{% url 'category' service.category.pk %}">{{ service.category.title }}</a>
-    </p>
+{#    <p>#}
+{#      <b>Категория:</b>#}
+{#      <a href="{% url 'category' service.category.pk %}">{{ service.category.title }}</a>#}
+{#    </p>#}
 
     <p>
       <b>Продолжительность:</b> {{ service.duration }}
@@ -20,7 +20,7 @@
 
     {{ service.description }}
 
-    <a href="{% url 'make_appointment' service.pk %}" class="btn btn-success">
+    <a href="/make_appointment/" class="btn btn-success">
       Записаться
     </a>
 
