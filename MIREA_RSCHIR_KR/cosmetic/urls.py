@@ -1,5 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from .views import *
 
@@ -20,4 +22,4 @@ urlpatterns = [
     path('signup/', RegisterView.as_view(), name='signup'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('profile/edit/', ProfileEditView.as_view(), name='profile_edit'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
